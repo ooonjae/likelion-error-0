@@ -83,7 +83,7 @@ print(Error:0)
             timeseries.head()
             ```
             
-            ![Untitled](Error%200%206b58920a14284e338b4ccff4d551f384/Untitled.png)
+            ![Untitled](../../Downloads/Export-73c303c4-d536-49b4-8518-497bf3f3a43a/Error%200%206b58920a14284e338b4ccff4d551f384/Untitled.png)
             
     2. 기술 이용 스택
         
@@ -97,9 +97,9 @@ print(Error:0)
 2. **데이터 전처리**
     1. Zone naming & indexing
         - 서울에 있는 쏘카존
-        ⇒ 전체 중 가장 존이 많이 분포되어 있는 서울지역으로(약440여개)으로 한정했습니다.
+        ⇒ 전체 중 가장 존이 많이 분포되어 있는 구역 중 서울지역으로(약440여개)으로 한정했습니다.
             
-            ![Untitled](Error%200%206b58920a14284e338b4ccff4d551f384/Untitled%201.png)
+            ![Untitled](../../Downloads/Export-73c303c4-d536-49b4-8518-497bf3f3a43a/Error%200%206b58920a14284e338b4ccff4d551f384/Untitled%201.png)
             
             ⇒ 또한, 이 존들 중에서 쏘카측에서 받은 데이터 상의 존들을 앞으로 저희가 다루는
             
@@ -114,9 +114,9 @@ print(Error:0)
             
             <이름 value_counts() 한 값>
             
-            ![Untitled](Error%200%206b58920a14284e338b4ccff4d551f384/Untitled%202.png)
+            ![Untitled](../../Downloads/Export-73c303c4-d536-49b4-8518-497bf3f3a43a/Error%200%206b58920a14284e338b4ccff4d551f384/Untitled%202.png)
             
-            ![Untitled](Error%200%206b58920a14284e338b4ccff4d551f384/Untitled%203.png)
+            ![Untitled](../../Downloads/Export-73c303c4-d536-49b4-8518-497bf3f3a43a/Error%200%206b58920a14284e338b4ccff4d551f384/Untitled%203.png)
             
         
         - 코드 보기
@@ -202,7 +202,7 @@ print(Error:0)
             
             ![Untitled](Error%200%206b58920a14284e338b4ccff4d551f384/Untitled%207.png)
             
-    
+        
 3. **Train / Test split**
     - 시계열 데이터의 범위는 2019년 1월 1일 ~ 11월 30로 전체를 9개월 : 2개월로 Split 했습니다.
     - 1월1일부터 9월 30일까지를 Train데이터로 사용해 모델에 학습을 시켰습니다.
@@ -442,19 +442,19 @@ print(Error:0)
         
         ※ 평균 MSE값 : **GradientBoosting : 1.08** /  **Prophet : 1.31** / LSTM : 1.38 (단위 : 대수)
         
-        ![mse.png](Error%200%206b58920a14284e338b4ccff4d551f384/mse.png)
+        ![mse.png](../../Downloads/Export-73c303c4-d536-49b4-8518-497bf3f3a43a/Error%200%206b58920a14284e338b4ccff4d551f384/mse.png)
         
     2. *Clustering*
         - 선정한 모델이 예측한 쏘카존의 향후 수요를 통해 **쏘카존 별 성장 가능성 Feature를** 추출 했습니다.
             
-            ![Untitled](Error%200%206b58920a14284e338b4ccff4d551f384/Untitled%209.png)
+            ![Untitled](../../Downloads/Export-73c303c4-d536-49b4-8518-497bf3f3a43a/Error%200%206b58920a14284e338b4ccff4d551f384/Untitled%209.png)
             
-            ![Untitled](Error%200%206b58920a14284e338b4ccff4d551f384/Untitled%2010.png)
+            ![Untitled](../../Downloads/Export-73c303c4-d536-49b4-8518-497bf3f3a43a/Error%200%206b58920a14284e338b4ccff4d551f384/Untitled%2010.png)
             
         - K-Means Clustering 기법을 이용해 전체 Socar존을 4개로 구분했습니다.
         - 코드보기
             
-            ![Untitled](Error%200%206b58920a14284e338b4ccff4d551f384/Untitled%2011.png)
+            ![Untitled](../../Downloads/Export-73c303c4-d536-49b4-8518-497bf3f3a43a/Error%200%206b58920a14284e338b4ccff4d551f384/Untitled%2011.png)
             
             ```python
             sns.lmplot(x='n_drive_avg', y='growth', data=Z, fit_reg=False,  # x-axis, y-axis, data, no line
@@ -468,29 +468,27 @@ print(Error:0)
             plt.title('Socar Zone K-Means Clustering Result',fontdict=title_font, pad=20)
             ```
             
-            ![clustering.png](Error%200%206b58920a14284e338b4ccff4d551f384/clustering.png)
+            ![clustering.png](../../Downloads/Export-73c303c4-d536-49b4-8518-497bf3f3a43a/Error%200%206b58920a14284e338b4ccff4d551f384/clustering.png)
             
     
     - 4개로 Clustering 된 id를 활용해 존별 특징을 분석했습니다.
         
         ※ Query, Value_counts(), groupby 등을 사용해 종합 분석했습니다.
         
-        - Cluster0 : 보유 차량의 수는 많지 않으나, 지역별로 요지에 위치하거나,
-                       지속적인 고정수요로 인해 꾸준한 성장을 보여주는 존
-        
-              **⇒ 포인트 존(Point Zone)**
-        
-        - Cluster1 : 차량수요 및 운행이 많고 성장 가능성도 높아 앞으로 전망이 기대되는 존
+        - Cluster_0 : 보유 차량의 수는 많지 않으나, 지역별로 요지에 위치하거나,
+                       지속적인 고정수요로 인해 꾸준한 성장을 보여주는 존 
+        ⇒ **포인트 존(Point Zone)**
+        - Cluster_1 : 차량수요 및 운행이 많고 성장 가능성도 높아 앞으로 전망이 기대되는 존
             
             ⇒ **슈퍼 쏘카존(Super_Socar Zone)**
             
-        - Cluster2 : 차량수요가 적고 성장 가능성도 낮아 운영이 종료될것으로 예측되는 존
+        - Cluster_2 : 차량수요가 적고 성장 가능성도 낮아 운영이 종료될것으로 예측되는 존
         
-               **⇒ 엔드 존(End Zone)**
+               ****⇒  **엔드 존(End Zone)**
         
-        - Cluster3 : 계절 별 수요가 탄력인 곳으로 시즌별 급격한 성장 또는 감소를 보여주는 존
+        - Cluster_3 : 계절 별 수요가 탄력인 곳으로 시즌별 급격한 성장 또는 감소를 보여주는 존
         
-               **⇒ 타겟 존(Target Zone)**
+               ****⇒  **타겟 존(Target Zone)**
         
     
     c. *Mapping*
@@ -519,19 +517,17 @@ print(Error:0)
     
     ![mapping.png](Error%200%206b58920a14284e338b4ccff4d551f384/mapping.png)
     
-
-1. **활용방안**
+6. **활용방안**
     1. **쏘카존별 최적 차량 배치**
         
-        ※ Target Zone은 계절별 수요가 탄력적이므로 수요가 없는 시즌에는 Super_Socar Zone 으로 
-        
-            차량을 이동하고, 수요가 높은 시기는 Target존에 차량을 집중하는 방법이 효과적입니다.
+        ※ Target Zone은 계절별 수요가 탄력적이므로 수요가 없는 시즌에는 Super_Socar Zone 으로
+            차량을 이동하고, 수요가 높은 시기는 Target존에 차량을 집중하는 방법이 효과적입니다. 
         
         - 지역의 Target 또는 Super_Socar Zone 과 다른 쏘카존 사이의 상관관계(Correlation)를 계산해 인근 지역에서 수요가 반대로 움직이는 존들을 Grouping 했습니다.
         
           ▶ 수요가 반대로 움직이는 존 : 특정 존의 차량 수요가 늘어남에 따라 수요가 떨어지는 존
         
-        ![Untitled](Error%200%206b58920a14284e338b4ccff4d551f384/Untitled%2012.png)
+        ![Untitled](../../Downloads/Export-73c303c4-d536-49b4-8518-497bf3f3a43a/Error%200%206b58920a14284e338b4ccff4d551f384/Untitled%2012.png)
         
         - Grouping한 쏘카존들의 유휴차량 Data를 Timeline으로 분석해 특정 시점의 존당 유휴차량과 부족차량을 판단했습니다.
         - 유휴차량이 많은 존에서 차량이 부족한 존으로의 차량 재배치를 실시할 수 있습니다.
@@ -539,7 +535,7 @@ print(Error:0)
         
         ※ **AJ파크 논현점, e편한세상 4단지 AJ파크, 풍산빌딩** 존의 유휴차량 수 타임라인 분석
         
-        ![3d_corr.png](Error%200%206b58920a14284e338b4ccff4d551f384/3d_corr.png)
+        ![3d_corr.png](../../Downloads/Export-73c303c4-d536-49b4-8518-497bf3f3a43a/Error%200%206b58920a14284e338b4ccff4d551f384/3d_corr.png)
         
         ⇒ 5월초의 경우 **e편한세상 4단지 AJ파크, 풍산빌딩**존은 차량이 부족했으나, 인근 **AJ파크 논현점의 경우 차량을 충분히 보유하고 있었습니다.** 
         
@@ -558,7 +554,7 @@ print(Error:0)
             print("Accuracy on test set: {:.3f}".format(gb1.score(x_test, y_test)))
             ```
             
-            ![Untitled](Error%200%206b58920a14284e338b4ccff4d551f384/Untitled%2013.png)
+            ![Untitled](../../Downloads/Export-73c303c4-d536-49b4-8518-497bf3f3a43a/Error%200%206b58920a14284e338b4ccff4d551f384/Untitled%2013.png)
             
         - 존별 데이터를 Timeline으로 분석해 수요가 줄어들것으로 예상되는 시점과 그 트렌드 분석을 통한 존별 운행 종료 시점을 조기 판단할 수 있었습니다.
         - 기존 운행종료로 판단된 존들과 비교했을때 약 **2달정도 빠른 예측**을 보였습니다.
@@ -566,10 +562,10 @@ print(Error:0)
             
             ※ 운행종료 예측모델 시각화 (존별 차량 운행 현황을 월별로 분석, 운행일수 표시) 
             
-            ![closed.png](Error%200%206b58920a14284e338b4ccff4d551f384/closed.png)
+            ![closed.png](../../Downloads/Export-73c303c4-d536-49b4-8518-497bf3f3a43a/Error%200%206b58920a14284e338b4ccff4d551f384/closed.png)
             
         
-2. **기대효과** 
+7. **기대효과** 
     
     위 활용방안을 통해 약 **52.1억원의 재무 개선 효과**가 있을 것으로 예상됩니다. 
     
@@ -582,14 +578,14 @@ print(Error:0)
     > 99.64 x 8,000원 x 4000 = 3,188,480,000원
     > 
     
-    b. 차량 운영 효율 향상으로 차량 고정비 및 감가상각 등 **4.2억원 비용절감**
+    1. 차량 운영 효율 향상으로 차량 고정비 및 감가상각 등 **4.2억원 비용절감**
     
       ※ 산출근거 : 효율향상 기간 x 예상 운영종료 존 수 x (감가상각비+고정비)
     
     > 2Month x 200(전국기준) x (0.2억 x 1/36+0.005억) = 4.2억원
     > 
     
-    c. 운영종료 존 조기 결정을 통한 차량 수익향상 으로 **영업이익 16억원 증가**
+    1. 운영종료 존 조기 결정을 통한 차량 수익향상 으로 **영업이익 16억원 증가**
     
       ※ 산출근거 : 효율향상 기간 x 차량 운행시간 증가분/월 x 차량 대여가격 x 종료 존 차량수
     
@@ -598,7 +594,7 @@ print(Error:0)
     > 2Month x 50H/월 x 8,000원/H x 2,000대 (전국기준) = 16억원
     > 
     
-3. **회고**
+8. **회고**
     
     쏘카는 매년 성장중이며, 2021년 3분기 흑자 전환했습니다. 저희가 개발한 머신러닝 모델을 통해
     
@@ -615,7 +611,6 @@ print(Error:0)
     [Time Series From Scratch - Exponentially Weighted Moving Averages (EWMA) Theory and Implementation](https://towardsdatascience.com/time-series-from-scratch-exponentially-weighted-moving-averages-ewma-theory-and-implementation-607661d574fe)
     
     P.S. 귀중한 데이터를 제공해준 쏘카 데이터 그룹장님과 직원분들, 훌륭한 강의와 커리큘럼을
-    
            통해 AI엔지니어의 길을 열어주신 강사님과 매니저님께도 감사드립니다.
     
 
