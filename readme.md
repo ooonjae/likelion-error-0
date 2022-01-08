@@ -68,7 +68,7 @@ print(Error:0)
 1. **데이터 수집 및 기술 이용 스택**
     1. 쏘카 제공 데이터
     저희 팀은 쏘카측에서 기본으로 제공한 2018년도 12월 31일 부터 2019년 11월 29일까지의 79만개의 데이터 셋을 최대한 이용하여 자료를 분석했습니다.
-        - 코드 보기
+        - 코드 보기 
             
             ```python
             timeseries_path = os.path.join(os.getcwd(), "drive", "MyDrive",  "new_socar_data.csv")
