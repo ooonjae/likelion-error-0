@@ -83,7 +83,7 @@ print(Error:0)
             timeseries.head()
             ```
             
-            ![Untitled](../../Downloads/Export-73c303c4-d536-49b4-8518-497bf3f3a43a/Error%200%206b58920a14284e338b4ccff4d551f384/Untitled.png)
+            ![Untitled](Error%200%206b58920a14284e338b4ccff4d551f384/Untitled.png)
             
     2. 기술 이용 스택
         
@@ -99,7 +99,7 @@ print(Error:0)
         - 서울에 있는 쏘카존
         ⇒ 전체 중 가장 존이 많이 분포되어 있는 구역 중 서울지역으로(약440여개)으로 한정했습니다.
             
-            ![Untitled](../../Downloads/Export-73c303c4-d536-49b4-8518-497bf3f3a43a/Error%200%206b58920a14284e338b4ccff4d551f384/Untitled%201.png)
+            ![Untitled](Error%200%206b58920a14284e338b4ccff4d551f384/Untitled%201.png)
             
             ⇒ 또한, 이 존들 중에서 쏘카측에서 받은 데이터 상의 존들을 앞으로 저희가 다루는
             
@@ -114,9 +114,9 @@ print(Error:0)
             
             <이름 value_counts() 한 값>
             
-            ![Untitled](../../Downloads/Export-73c303c4-d536-49b4-8518-497bf3f3a43a/Error%200%206b58920a14284e338b4ccff4d551f384/Untitled%202.png)
+            ![Untitled](Error%200%206b58920a14284e338b4ccff4d551f384/Untitled%202.png)
             
-            ![Untitled](../../Downloads/Export-73c303c4-d536-49b4-8518-497bf3f3a43a/Error%200%206b58920a14284e338b4ccff4d551f384/Untitled%203.png)
+            ![Untitled](Error%200%206b58920a14284e338b4ccff4d551f384/Untitled%203.png)
             
         
         - 코드 보기
@@ -196,7 +196,7 @@ print(Error:0)
             
             ```python
             for s in range(1,50):
-              ts_resample22['shifted_{}'.format(s)] = ts_resample22.groupby('zone').n_drive_1day.shift(s)
+              ts_resample22['shifted_{}'.format(s)] = ts_resample22.groupby('zone').n_drive_1day.shift(s+7)
             ts_resample22
             ```
             
@@ -442,19 +442,14 @@ print(Error:0)
         
         ※ 평균 MSE값 : **GradientBoosting : 1.08** /  **Prophet : 1.31** / LSTM : 1.38 (단위 : 대수)
         
-        ![mse.png](../../Downloads/Export-73c303c4-d536-49b4-8518-497bf3f3a43a/Error%200%206b58920a14284e338b4ccff4d551f384/mse.png)
+        ![mse.png](Error%200%206b58920a14284e338b4ccff4d551f384/mse.png)
         
     2. *Clustering*
         - 선정한 모델이 예측한 쏘카존의 향후 수요를 통해 **쏘카존 별 성장 가능성 Feature를** 추출 했습니다.
-            
-            ![Untitled](../../Downloads/Export-73c303c4-d536-49b4-8518-497bf3f3a43a/Error%200%206b58920a14284e338b4ccff4d551f384/Untitled%209.png)
-            
-            ![Untitled](../../Downloads/Export-73c303c4-d536-49b4-8518-497bf3f3a43a/Error%200%206b58920a14284e338b4ccff4d551f384/Untitled%2010.png)
-            
         - K-Means Clustering 기법을 이용해 전체 Socar존을 4개로 구분했습니다.
         - 코드보기
             
-            ![Untitled](../../Downloads/Export-73c303c4-d536-49b4-8518-497bf3f3a43a/Error%200%206b58920a14284e338b4ccff4d551f384/Untitled%2011.png)
+            ![Untitled](Error%200%206b58920a14284e338b4ccff4d551f384/Untitled%209.png)
             
             ```python
             sns.lmplot(x='n_drive_avg', y='growth', data=Z, fit_reg=False,  # x-axis, y-axis, data, no line
@@ -468,27 +463,32 @@ print(Error:0)
             plt.title('Socar Zone K-Means Clustering Result',fontdict=title_font, pad=20)
             ```
             
-            ![clustering.png](../../Downloads/Export-73c303c4-d536-49b4-8518-497bf3f3a43a/Error%200%206b58920a14284e338b4ccff4d551f384/clustering.png)
+            ![clustering.png](Error%200%206b58920a14284e338b4ccff4d551f384/clustering.png)
             
     
     - 4개로 Clustering 된 id를 활용해 존별 특징을 분석했습니다.
         
         ※ Query, Value_counts(), groupby 등을 사용해 종합 분석했습니다.
         
-        - Cluster_0 : 보유 차량의 수는 많지 않으나, 지역별로 요지에 위치하거나,
-                       지속적인 고정수요로 인해 꾸준한 성장을 보여주는 존 
-        ⇒ **포인트 존(Point Zone)**
-        - Cluster_1 : 차량수요 및 운행이 많고 성장 가능성도 높아 앞으로 전망이 기대되는 존
+        - **포인트 존**(**Point Zone,** Cluster_0)
             
-            ⇒ **슈퍼 쏘카존(Super_Socar Zone)**
+            = 보유 차량의 수는 많지 않으나, 지역별로 요지에 위치하거나,
+            지속적인 고정수요로 인해 꾸준한 성장을 보여주는 존 
             
-        - Cluster_2 : 차량수요가 적고 성장 가능성도 낮아 운영이 종료될것으로 예측되는 존
+        - **슈퍼 쏘카존**(**Super_Socar Zone,** Cluster_1)
+            
+            = 차량수요 및 운행이 많고 성장 가능성도 높아 앞으로 전망이 기대되는 존
+            
+        - **엔드 존**(**End Zone,** Cluster_2)
+            
+            = 차량수요가 적고 성장 가능성도 낮아 운영이 종료될것으로 예측되는 존
+            
+        - **타겟 존**(**Target Zone,** Cluster_3)
+            
+            = 계절 별 수요가 탄력인 곳으로 시즌별 급격한 성장 또는 감소를 보여주는 존
+            
         
-               ****⇒  **엔드 존(End Zone)**
-        
-        - Cluster_3 : 계절 별 수요가 탄력인 곳으로 시즌별 급격한 성장 또는 감소를 보여주는 존
-        
-               ****⇒  **타겟 존(Target Zone)**
+               ****
         
     
     c. *Mapping*
@@ -527,7 +527,7 @@ print(Error:0)
         
           ▶ 수요가 반대로 움직이는 존 : 특정 존의 차량 수요가 늘어남에 따라 수요가 떨어지는 존
         
-        ![Untitled](../../Downloads/Export-73c303c4-d536-49b4-8518-497bf3f3a43a/Error%200%206b58920a14284e338b4ccff4d551f384/Untitled%2012.png)
+        ![Untitled](Error%200%206b58920a14284e338b4ccff4d551f384/Untitled%2010.png)
         
         - Grouping한 쏘카존들의 유휴차량 Data를 Timeline으로 분석해 특정 시점의 존당 유휴차량과 부족차량을 판단했습니다.
         - 유휴차량이 많은 존에서 차량이 부족한 존으로의 차량 재배치를 실시할 수 있습니다.
@@ -535,14 +535,14 @@ print(Error:0)
         
         ※ **AJ파크 논현점, e편한세상 4단지 AJ파크, 풍산빌딩** 존의 유휴차량 수 타임라인 분석
         
-        ![3d_corr.png](../../Downloads/Export-73c303c4-d536-49b4-8518-497bf3f3a43a/Error%200%206b58920a14284e338b4ccff4d551f384/3d_corr.png)
+        ![3d_corr.png](Error%200%206b58920a14284e338b4ccff4d551f384/3d_corr.png)
         
         ⇒ 5월초의 경우 **e편한세상 4단지 AJ파크, 풍산빌딩**존은 차량이 부족했으나, 인근 **AJ파크 논현점의 경우 차량을 충분히 보유하고 있었습니다.** 
         
         ⇒ 모델이 예측한 결과 12월의 경우 **e편한세상 4단지 AJ파크**의 차량을 **풍산빌딩** 또는 **AJ파크로 재배치 할 필요가 있다**고 보입니다. 
         
     2. **쏘카존 운영 종료 시점 예측**
-        - 차량수가 많지 않은 Point Zone과 End Zone을 대상으로 Classification 모델을 생성해 쏘카존의 운행종료 시점을 **약 87% 정확도**로 조기 예측했습니다.
+        - 차량수가 많지 않은 Point Zone과 End Zone을 대상으로 Classification 모델을 생성해 쏘카존의 운행종료 시점을 **약 95% 정확도**로 조기 예측했습니다.
             
             ```python
             from sklearn.ensemble import GradientBoostingClassifier
@@ -554,7 +554,7 @@ print(Error:0)
             print("Accuracy on test set: {:.3f}".format(gb1.score(x_test, y_test)))
             ```
             
-            ![Untitled](../../Downloads/Export-73c303c4-d536-49b4-8518-497bf3f3a43a/Error%200%206b58920a14284e338b4ccff4d551f384/Untitled%2013.png)
+            ![Untitled](Error%200%206b58920a14284e338b4ccff4d551f384/Untitled%2011.png)
             
         - 존별 데이터를 Timeline으로 분석해 수요가 줄어들것으로 예상되는 시점과 그 트렌드 분석을 통한 존별 운행 종료 시점을 조기 판단할 수 있었습니다.
         - 기존 운행종료로 판단된 존들과 비교했을때 약 **2달정도 빠른 예측**을 보였습니다.
@@ -562,7 +562,7 @@ print(Error:0)
             
             ※ 운행종료 예측모델 시각화 (존별 차량 운행 현황을 월별로 분석, 운행일수 표시) 
             
-            ![closed.png](../../Downloads/Export-73c303c4-d536-49b4-8518-497bf3f3a43a/Error%200%206b58920a14284e338b4ccff4d551f384/closed.png)
+            ![closed.png](Error%200%206b58920a14284e338b4ccff4d551f384/closed.png)
             
         
 7. **기대효과** 
