@@ -329,7 +329,7 @@ print(Error:0)
         
         - 모델링 결과 : 예측값(파란색 실선)과 실제 Data(검은 점)
             
-            ![result.png](Error%200%206b58920a14284e338b4ccff4d551f384/%EA%B2%B0%EA%B3%BC.png)
+            ![result.png](Error%200%206b58920a14284e338b4ccff4d551f384/result.png)
             
         - 전체 추이 및 요일별, 시간대별 영향을 분석해 예측모델에 반영
             
